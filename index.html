@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Mark Sheet</title>
+    <!-- LINK BOOTSTRAP 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        
+        body,
+        html {
+            height: 100%;
+            font-family: sans-serif;
+            background-image: linear-gradient(to right, #4158d0, #c850c0);
+        }
+        
+        .input-group-text {
+            width: 100px;
+        }
+        
+        .update {
+            display: none;
+        }
+        
+        @media screen and (max-width:768px) {
+            div.container>div>button {
+                font-size: 70%;
+            }
+        }
+        
+        .highLight {
+            background-color: #ffeb93 !important;
+        }
+        
+        .selected {
+            background-color: #ff9393 !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="mt-3 d-flex">
+            <button class="btn btn-light mr-auto " data-toggle="modal" data-target="#myModal" id="nhapDiem">Nhập điểm</button>
+            <button class="btn btn-info ml-2 " id="btnTinhDTB">Tính điểm trung bình</button>
+            <button class="btn btn-warning ml-2 " id="btnXacDinhHocSinh">Xác định học sinh giỏi</button>
+        </div>
+        <table id="tableMark" class="table table-hover text-center mt-3 table-striped ">
+            <thead class="thead-dark">
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Toán</th>
+                <th>Lý</th>
+                <th>Hóa</th>
+                <th>Điểm trung bình</th>
+            </thead>
+            <tbody class="bg-light">
+
+                <tr>
+                    <td>1</td>
+                    <td>tran thanh hải</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>8.1</td>
+                    <td>?</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Võ Đức huy</td>
+                    <td>5.2</td>
+                    <td>10</td>
+                    <td>6.2</td>
+                    <td>?</td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Tạ Kim Tài</td>
+                    <td>7.5</td>
+                    <td>9</td>
+                    <td>6.2</td>
+                    <td>?</td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Kiều Tân Chiến</td>
+                    <td>9</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>?</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <p>click vào btn nhập điểm để mở modal nhập điểm <br> <i>Trong bài này e có dùng câu lệnh để gọi show và hide modal của bootstrap : $('#myModal').modal('show') </i></p>
+            <span>Double click vào 1 row để có thể chỉnh sửa và xóa 1 học sinh</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    </div>
+
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="titleModal">Nhập điểm</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <!-- class="was-validated"   -->
+                <div class="modal-body">
+                    <form action="" id="formMark">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Họ tên</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Trần Thanh Hải" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Điểm toán</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0 đến 10 điểm" min="0" max="10" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Điểm lý</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0 đến 10 điểm" min="0" max="10" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Điểm hóa</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="0 đến 10 điểm" min="0" max="10" required>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="nhapDiemModal">Nhập</button>
+                    <button type="button" class="btn btn-success update">Cập nhật</button>
+                    <button type="button" class="btn btn-danger update">Xóa</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- JS Custom -->
+    <script src="js/customJS.js"></script>
+
+    <!-- JS, BOOTSTRAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
